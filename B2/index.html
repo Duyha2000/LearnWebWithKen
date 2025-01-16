@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="formId"></div>
+
+    <div id="studentTable">
+      <h2>Student List</h2>
+      <form id="searchForm">
+        <label for="searchBtn">Search by student name: </label>
+        <input id="searchBtn" type="text" />
+        <button>Submit</button>
+      </form>
+      <button id="filter">Filter alphabetically</button>
+      <table id="table">
+        <tr>
+          <th>#</th>
+          <th>Fullname</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>Hometown</th>
+          <th>Gender</th>
+          <th>Action</th>
+        </tr>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+label {
+  padding-top: 5px;
+}
+
+input {
+  padding-top: 5px;
+}
+
+#fullnameErr,
+#emailErr,
+#phoneNumErr,
+#hometownErr {
+  display: none;
+  color: red;
+}
