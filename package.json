@@ -1,0 +1,24 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "Tran Duy",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Duyha2000/LearnWebWithKen.git"
+  },
+  "author": "Duy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Duyha2000/LearnWebWithKen/issues"
+  },
+  "homepage": "https://github.com/Duyha2000/LearnWebWithKen#readme",
+  "dependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
