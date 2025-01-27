@@ -1,49 +1,48 @@
 const http = require("http");
 const fs = require("fs");
 
-const data = fs.readFileSync("data.json", "utf8");
-console.log("Dữ liệu trong file data.json:\n", data);
+const readThis = fs.readFileSync("read-this.txt");
+// // console.log(`${readThis}`);
+const readInput = fs.readFileSync("input.txt");
+const readAppend = fs.readFileSync("append.txt");
+// // console.log(`${readInput} ${readAppend}`);
+//  readFileSync() và writeFileSync()
+fs.writeFileSync("final.txt", `${readInput} ${readAppend}`);
 
-// 1. Đọc file `read-this.txt` và log ra console
-// const readThisContent = fs.readFileSync("read-this.txt", "utf8");
-// console.log("Nội dung file read-this.txt:\n", readThisContent);
+const readJson = JSON.parse(fs.readFileSync("data.json"));
+console.log(readJson);
 
-// 2. Đọc file `input.txt` và `append.txt`, log ra console
-// const inputContent = fs.readFileSync("input.txt", "utf8");
-// console.log("Nội dung file input.txt:\n", inputContent);
-
-// const appendContent = fs.readFileSync("append.txt", "utf8");
-// console.log("Nội dung file append.txt:\n", appendContent);
-
-// 3. Gộp nội dung của 2 file trên và ghi vào file `final.txt`
-// const finalContent = inputContent + appendContent;
-// fs.writeFileSync("final.txt", finalContent);
-// console.log("Đã ghi nội dung gộp vào file final.txt!");
-
-// -------------------- Tạo server --------------------
 const server = http.createServer((req, res) => {
-  // Log ra đường dẫn (URL) người dùng gõ trên trình duyệt
-  //   console.log("req.url:", req.url);
-  // Đặt header để trình duyệt hiểu chúng ta trả về nội dung HTML
-  //   res.setHeader("Content-Type", "text/html");
-  // Kiểm tra đường dẫn và trả về nội dung tương ứng
-  //   if (req.url === "/") {
-  //     res.end("<h1>This is homepage</h1>");
-  //   } else if (req.url === "/overview") {
-  //     res.end("<h1>This is overview page</h1>");
-  //   } else if (req.url === "/product") {
-  //     res.end("<h1>This is product page</h1>");
-  //   } else {
-  //     // Nếu không khớp bất kì đường dẫn nào ở trên
-  //     res.end("<h1>PAGE NOT FOUND</h1>");
-  //   }
-  if (req.url === "/api") {
-    res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify(data));
+  res.writeHead(200, "Content-Type: application/json");
+  if (req.url === "/") {
+    res.write(readThis);
+    res.write(readInput);
+    res.end();
+  } else if (req.url === "/overview") {
+    res.end("<h1>This is overview page</h1>");
+  } else if (req.url === "/product") {
+    res.end("<h1>This is Product page</h1>");
+  } else if (req.url === "/api") {
+    res.end(readJson);
+  } else if (req.url.startsWith("/api/")) {
+    // split:
+    console.log(req.url); // /api/...
+    const id = Number(req.url.split("/")[2]);
+    console.log(id); // 2
+
+    const item = readJson?.students?.find((obj) => obj.id == id);
+    console.log(item);
+
+    // res.end(JSON.stringify(readJson[id]));
+  } else {
+    res.end("<h1>PAGE NOT FOUND</h1>"); // 1 dòng dùng res.end
   }
+  // http://localhost:8080/api/2
+  // Đường dẫn /api/:id => gửi về đối tượng tương ứng
 });
 
-// Lắng nghe trên port 8080
 server.listen(8080, () => {
-  console.log("Server listening on port 8080");
+  console.log("Server is running on port 8080!");
 });
+
+// GET, POST, PUT/ PATCH: update, DELETE

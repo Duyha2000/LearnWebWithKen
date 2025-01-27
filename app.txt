@@ -1,0 +1,42 @@
+const http = require("http");
+// Giao thức HTTP:
+
+// Static site: HTML/CSS
+// dynamic site: -> admin (CMS) - wordpress
+// đoạn text/json -> html -> client
+// SEO: Search Engine Optimization
+// server side render (NextJs,ExpressJs) - Client side render (React JS)
+// nodejs: server side render
+// npm: node package manager
+// package.json: chứa thông tin về project
+// để cài đặt package json: npm init
+// node_modules: chứa các thư viện cần thiết cho project
+// import export
+
+// localhost:8080/product
+// localhost:8080/category
+const server = http.createServer((req, res) => {
+  // routing:
+  res.writeHead(200, { "Content-Type": "text/html" });
+  if (req.url === "/") {
+    res.end("Home page");
+  } else if (req.url === "/product") {
+    res.end("Product page");
+  } else if (req.url === "/category") {
+    res.end("Category page");
+  } else {
+    res.end("404 page");
+  }
+});
+
+// Chạy trên port: 3000, 8080 - 8000: port mặc định
+server.listen(8080, () => {
+  console.log("Server is running on port 8080");
+});
+
+// npm init
+// control + ` : mở terminal
+// control + c : dừng server
+// nodemon: tự động khởi động lại server khi có thay đổi
+// npm install nodemon --save-dev
+// npm install -g nodemon
